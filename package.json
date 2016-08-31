@@ -1,0 +1,22 @@
+{
+  "name": "virtualama",
+  "version": "2.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "leaflet": "^0.7.7",
+    "leaflet-routing-machine": "^3.1.0",
+    "lodash": "^4.15.0"
+  },
+  "devDependencies": {
+    "css-loader": "^0.24.0",
+    "file-loader": "^0.9.0",
+    "style-loader": "^0.13.1",
+    "url-loader": "^0.5.7"
+  }
+}

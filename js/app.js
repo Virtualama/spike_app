@@ -1,5 +1,17 @@
 'use strict';
 
+require('leaflet/dist/leaflet.css')
+require('leaflet-routing-machine/dist/leaflet-routing-machine.css')
+
+require('../css/app.css')
+require('leaflet/dist/images/marker-icon.png')
+require('leaflet/dist/images/marker-icon-2x.png')
+require('leaflet/dist/images/marker-shadow.png')
+
+const L = require('leaflet')
+L.Routing = require('leaflet-routing-machine')
+
+
 var serializeHTML = function(node){
   var wrapper = document.createElement('div')
   wrapper.appendChild(node)
@@ -27,6 +39,7 @@ L.CustomMarker = L.Marker.extend({
 })
 
 L.sourceMarker = function(latlng, options){
+  // return L.marker(latlng, options)
   var me = new L.CustomMarker(latlng, options, {class: 'source', text: 'S'})
   console.log(me)
   return me
@@ -48,11 +61,11 @@ document.addEventListener('DOMContentLoaded', function(){
     attributionControl: false
   })
 
-  // window.allCoords = []
+  L.Icon.Default.imagePath = './build/images/'
 
-  L.Icon.Default.imagePath = './images/vendor/leaflet'
-
-  L.tileLayer('./tiles/{z}/{x}/{y}.png', {
+  // L.tileLayer('http://c.tile.stamen.com/watercolor/{z}/{x}/{y}.jpg', {
+  L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+  // L.tileLayer('./tiles/{z}/{x}/{y}.png', {
       attribution: '&copy; OpenStreetMap contributors'
   }).addTo(map)
 
@@ -74,6 +87,11 @@ document.addEventListener('DOMContentLoaded', function(){
       }).addTo(layerGroup)
 
       L.polyline([firstClickedPoint, secondClickedPoint], {weight: 1}).addTo(map)
+
+      L.Routing.control({
+        waypoints: [firstClickedPoint, secondClickedPoint],//.map((marker) => marker._latlng),
+        profile: 'walking'
+      }).addTo(map);
     })
 
     // lastMarker.bindPopup('xxx')
