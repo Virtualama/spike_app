@@ -2,48 +2,19 @@
 <head>
 	<title></title>
 
-	<script type="text/javascript" src="./js/vendor/leaflet.js"></script>
-	<link rel="stylesheet" type="text/css" href="./css/vendor/leaflet.css">
+	<script type="text/javascript" src="./js/vendor/leaflet_07.js"></script>
+	<script type="text/javascript" src="./js/vendor/leaflet-routing-machine.js"></script>
+	<link rel="stylesheet" type="text/css" href="./css/vendor/leaflet_07.css">
+	<link rel="stylesheet" type="text/css" href="./css/vendor/leaflet-routing-machine.css">
+	<link rel="stylesheet" type="text/css" href="./css/app.css">
 
 </head>
 <body>
 
-
-
 	<div id="map"></div>
+	<input type="button" value="log" id="log">
+	<input type="button" value="clear" id="clear">
 
-	<script type="text/javascript">
-
-	document.addEventListener('DOMContentLoaded', function(){
-
-
-		window.myMap = L.map('map').setView([38.8145,0.1081], 13)
-		var allCoords = []
-
-		L.Icon.Default.imagePath = './images/vendor/leaflet'
-
-
-		L.tileLayer('./tiles/{z}/{x}/{y}.png', {
-				attribution: '&copy; OpenStreetMap contributors'
-		}).addTo(myMap)
-
-
-	})
-
-	</script>
-
-	<style type="text/css">
-
-		html, body, #map{
-			height: 100%;
-			width: 100%;
-		}
-
-		// #map {
-		//   width: 300px;
-		//   height: 300px;
-		// }
-
-</style>
+	<script type="text/javascript" src="./js/app.js"></script>
 </body>
 </html>

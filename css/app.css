@@ -1,0 +1,33 @@
+html, body, #map{
+	height: 100%;
+	width: 100%;
+}
+
+#map {
+	height: 65%
+}
+
+.source, .destination {
+	box-sizing: border-box;
+/*	position: absolute;*/
+	width: 100%;
+	height: 100%;
+	text-align: center;
+	line-height: 14px;
+	color: white;
+	font-weight: bold;
+	border-radius: 50%;
+	border-width: 2px;
+	border-style: solid;
+}
+
+.source {
+	background-color: rgba(255, 0, 0, 0.5);
+	border-color: rgba(255, 0, 0, 0.2);
+}
+
+.destination {
+	background-color: rgba(0, 150, 200, 0.5);
+	border-color: rgba(0, 150, 200, 0.2);
+}
+
