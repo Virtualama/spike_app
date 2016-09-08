@@ -8,13 +8,15 @@ module.exports = {
   output: {
     path: './build/',
     filename: 'bundle.js',
-    publicPath: './build/'
+    publicPath: '/build/'
   },
 
   module: {
     loaders: [
       { test: /\.css$/, loader: 'style!css' },
-      { test: /\.png$/, loader: 'file?name=images/[name].[ext]' }
+      { test: /\.png$/, loader: 'file?name=images/[name].[ext]' },
+      { test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader: "url-loader?limit=10000&mimetype=application/font-woff" },
+      { test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader: "file-loader" }
     ]
   },
 
