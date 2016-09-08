@@ -1,5 +1,6 @@
 'use strict';
 
+require('font-awesome-webpack')
 require('leaflet/dist/leaflet.css')
 require('leaflet-routing-machine/dist/leaflet-routing-machine.css')
 
@@ -10,7 +11,6 @@ require('leaflet/dist/images/marker-shadow.png')
 
 const L = require('leaflet')
 L.Routing = require('leaflet-routing-machine')
-
 
 var serializeHTML = function(node){
   var wrapper = document.createElement('div')
@@ -24,7 +24,7 @@ L.CustomMarker = L.Marker.extend({
 
     var htmlContent = document.createElement('div')
     htmlContent.className = content.class
-    htmlContent.innerText = content.text
+    htmlContent.classList.add('source')
 
     L.Marker.prototype.initialize.call(this, latlng, {
       icon: L.divIcon({
@@ -40,13 +40,13 @@ L.CustomMarker = L.Marker.extend({
 
 L.sourceMarker = function(latlng, options){
   // return L.marker(latlng, options)
-  var me = new L.CustomMarker(latlng, options, {class: 'source', text: 'S'})
+  var me = new L.CustomMarker(latlng, options, {class: 'fa fa-1x fa-child'})
   console.log(me)
   return me
 }
 
 L.destMarker = function(latlng, options){
-  return new L.CustomMarker(latlng, options, {class: 'destination', text: 'D'})
+  return new L.CustomMarker(latlng, options, {class: 'fa fa-1x fa-street-view'})
 }
 
 document.addEventListener('DOMContentLoaded', function(){
