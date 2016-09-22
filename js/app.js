@@ -20,33 +20,36 @@ var serializeHTML = function(node){
 }
 
 L.CustomMarker = L.Marker.extend({
-  initialize: function(latlng, options, content){
+  initialize: function(latlng, options, type, content){
 
-    var htmlContent = document.createElement('div')
-    htmlContent.className = content.class
-    htmlContent.classList.add('source')
+    var htmlMarker = document.createElement('div')
+    htmlMarker.classList.add('custom-marker')
+    if (type)
+      htmlMarker.classList.add(type)
+
+    if (content) {
+      var htmlContent = document.createElement('i')
+      htmlContent.className = content.class
+      htmlMarker.appendChild(htmlContent)
+    }
 
     L.Marker.prototype.initialize.call(this, latlng, {
       icon: L.divIcon({
-        html: serializeHTML(htmlContent),
-        className: 'start-point',
-        iconSize: [18, 18],
-        // iconAnchor: [15, 15]
+        html: serializeHTML(htmlMarker),
+        className: '',
+        iconSize: [24, 24],
+        iconAnchor: [12, 29]
       })
     })
-
   }
 })
 
 L.sourceMarker = function(latlng, options){
-  // return L.marker(latlng, options)
-  var me = new L.CustomMarker(latlng, options, {class: 'fa fa-1x fa-child'})
-  console.log(me)
-  return me
+  return new L.CustomMarker(latlng, options, 'source', {class: 'fa fa-1x fa-child'})
 }
 
 L.destMarker = function(latlng, options){
-  return new L.CustomMarker(latlng, options, {class: 'fa fa-1x fa-street-view'})
+  return new L.CustomMarker(latlng, options, 'destination', {class: 'fa fa-1x fa-street-view'})
 }
 
 document.addEventListener('DOMContentLoaded', function(){
@@ -75,23 +78,49 @@ document.addEventListener('DOMContentLoaded', function(){
   map.once('click', function(ev) {
     var firstClickedPoint = L.latLng(ev.latlng)
 
-    L.sourceMarker(firstClickedPoint, {
-      title: ev.latlng,
-    }).addTo(layerGroup)
+    // L.sourceMarker(firstClickedPoint, {
+    //   title: ev.latlng,
+    // }).addTo(layerGroup)
 
     map.once('click', function(ev) {
       var secondClickedPoint = L.latLng(ev.latlng)
 
-      L.destMarker(secondClickedPoint, {
-        title: ev.latlng,
-      }).addTo(layerGroup)
+      // L.destMarker(secondClickedPoint, {
+      //   title: ev.latlng,
+      // }).addTo(layerGroup)
 
-      L.polyline([firstClickedPoint, secondClickedPoint], {weight: 1}).addTo(map)
+      // L.polyline([firstClickedPoint, secondClickedPoint], {weight: 1}).addTo(map)
+
+      // L.Routing.control({
+      //   waypoints: [firstClickedPoint, secondClickedPoint],//.map((marker) => marker._latlng),
+      //   profile: 'walking'
+      // }).addTo(map);
 
       L.Routing.control({
-        waypoints: [firstClickedPoint, secondClickedPoint],//.map((marker) => marker._latlng),
-        profile: 'walking'
-      }).addTo(map);
+        plan: L.Routing.plan([firstClickedPoint, secondClickedPoint], {
+          createMarker: function(i, wp) {
+            if (wp.latLng === firstClickedPoint)
+              return L.sourceMarker(wp.latLng)
+
+            if (wp.latLng === secondClickedPoint)
+              return L.destMarker(wp.latLng)
+
+            return new L.CustomMarker(wp.latLng)
+          },
+          routeWhileDragging: true
+        }),
+        routeWhileDragging: true,
+        routeDragTimeout: 250,
+        showAlternatives: true,
+        altLineOptions: {
+          styles: [
+            {color: 'black', opacity: 0.15, weight: 9},
+            {color: 'white', opacity: 0.8, weight: 6},
+            {color: 'blue', opacity: 0.5, weight: 2}
+          ]
+        }
+      }).addTo(map)
+
     })
 
     // lastMarker.bindPopup('xxx')

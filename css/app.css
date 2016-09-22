@@ -1,3 +1,7 @@
+* {
+	box-sizing: border-box;
+}
+
 html, body, #map{
 	height: 100%;
 	width: 100%;
@@ -7,27 +11,55 @@ html, body, #map{
 	height: 85%
 }
 
-.source, .destination {
-	box-sizing: border-box;
-/*	position: absolute;*/
+.custom-marker {
+	position: absolute;
 	width: 100%;
 	height: 100%;
 	text-align: center;
-	line-height: 14px;
-	color: white;
-	font-weight: bold;
-	border-radius: 50%;
+	color: black;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.custom-marker:before {
+	content: '';
+	height: calc(100% - 4px);
+	width:  calc(100% - 4px);
+	position: absolute;
+	left: 0;
+	top: 0;
+
 	border-width: 2px;
 	border-style: solid;
+	border-radius: 50% 50%  0;
+	transform: rotate(45deg);
+	z-index: -1;
+
+	background-color: rgba(100, 100, 100, 0.7);
+	border-color: rgba(120, 120, 120, 0.5);
 }
 
-.source {
-	background-color: rgba(255, 0, 0, 0.5);
-	border-color: rgba(255, 0, 0, 0.2);
+.custom-marker:after {
+	content: '';
+	height: calc(100% - 8px);
+	width:  calc(100% - 8px);
+	position: absolute;
+	left: 4px;
+	top: 4px;
+
+	background-color: white;
+	border-radius: 50%;
+	z-index: -1;
 }
 
-.destination {
-	background-color: rgba(0, 150, 200, 0.5);
-	border-color: rgba(0, 150, 200, 0.2);
+.source:before {
+	background-color: rgba(255, 100, 0, 0.7);
+	border-color: rgba(255, 50, 0, 0.5);
+}
+
+.destination:before {
+	background-color: rgba(0, 200, 200, 0.7);
+	border-color: rgba(0, 150, 200, 0.5);
 }
 
