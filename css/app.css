@@ -2,13 +2,28 @@
 	box-sizing: border-box;
 }
 
-html, body, #map{
+html, body{
 	height: 100%;
 	width: 100%;
+	display: flex;
+	align-items: center;
 }
 
 #map {
-	height: 85%
+	height: 90%;
+	width: 85%;
+	display: inline-block;
+}
+
+.custom-marker-wrapper:before {
+	background-image: url(~leaflet/dist/images/marker-shadow.png);
+	position: absolute;
+	content: '';
+	width: 41px;
+	height: 41px;
+	left: 0;
+	bottom: -4px;
+	z-index: -1;
 }
 
 .custom-marker {

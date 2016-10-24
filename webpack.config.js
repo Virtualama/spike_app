@@ -20,6 +20,11 @@ module.exports = {
     ]
   },
 
+  // resolve: {
+  //   alias: {
+  //     leaflet_marker_shadow: __dirname + "/node_modules/leaflet/dist/images/marker-shadow.png"
+  //   }
+  // }
 
   // resolve: {
   //   // extensions: ['', '.html', '.js', '.json', '.scss', '.css'],

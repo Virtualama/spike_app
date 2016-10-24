@@ -1,7 +1,7 @@
 {
   "name": "virtualama",
   "version": "2.0.0",
-  "description": "",
+  "description": "experiments & tests for the new app version",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

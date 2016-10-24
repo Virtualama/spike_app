@@ -36,7 +36,7 @@ L.CustomMarker = L.Marker.extend({
     L.Marker.prototype.initialize.call(this, latlng, {
       icon: L.divIcon({
         html: serializeHTML(htmlMarker),
-        className: '',
+        className: 'custom-marker-wrapper',
         iconSize: [24, 24],
         iconAnchor: [12, 29]
       })
@@ -105,7 +105,7 @@ document.addEventListener('DOMContentLoaded', function(){
             if (wp.latLng === secondClickedPoint)
               return L.destMarker(wp.latLng)
 
-            return new L.CustomMarker(wp.latLng)
+            return new L.CustomMarker(wp.latLng, {} )
           },
           routeWhileDragging: true
         }),
