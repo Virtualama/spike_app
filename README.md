@@ -1,7 +1,7 @@
 #Spike app for testing new app features
 
 ##recomended step
-0. alias npm-exec='PATH=$(npm bin):$PATH'
+* add "alias npm-exec='PATH=$(npm bin):$PATH' " to ~/.bashrc
 
 ## set up:
 1. clone repo
